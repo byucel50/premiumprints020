@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>premiumprints020 — Premium 3D Print Studio | Amsterdam</title>
+  <meta name="description" content="premiumprints020 is Amsterdam's most advanced 3D print studio. From concept to creation — we print the impossible." />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js" defer></script>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="loading">
+
+<!-- ═══════════════════════════════════════════
+     LOADER
+═══════════════════════════════════════════ -->
+<div id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <svg class="loader-logo" viewBox="0 0 60 60" fill="none">
+      <polygon points="30,2 58,16 58,44 30,58 2,44 2,16" stroke="url(#lg)" stroke-width="1.5" fill="none"/>
+      <polygon points="30,12 48,22 48,38 30,48 12,38 12,22" stroke="url(#lg2)" stroke-width="1" fill="none" opacity="0.5"/>
+      <circle cx="30" cy="30" r="4" fill="url(#lg)"/>
+      <defs>
+        <linearGradient id="lg" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#ffd700"/>
+          <stop offset="1" stop-color="#f59e0b"/>
+        </linearGradient>
+        <linearGradient id="lg2" x1="60" y1="0" x2="0" y2="60" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#f59e0b"/>
+          <stop offset="1" stop-color="#ff8c00"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="loader-text">premiumprints020</div>
+    <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
+    <div class="loader-sub">INITIALIZING PRINT MATRIX</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo" aria-label="premiumprints020 — back to top">
+    <img src="logo.png" alt="premiumprints020" class="nav-logo-img" />
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+    <li><a href="#process" class="nav-link">Process</a></li>
+    <li><a href="#ai-lab" class="nav-link">AI Lab</a></li>
+    <li><a href="#pricing" class="nav-link">Pricing</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <a href="#contact-cta" class="nav-cta">Start Project <span class="cta-arrow">→</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true">
+  <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close">✕</button>
+  <nav class="mobile-nav-links">
+    <a href="#gallery">Gallery</a>
+    <a href="#process">Process</a>
+    <a href="#ai-lab">AI Lab</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact-cta" class="mobile-cta">Start Project →</a>
+  </nav>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     S1 — HERO
+═══════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Amsterdam — Est. 2019
+    </div>
+
+    <h1 class="hero-title">
+      <span class="title-line" data-text="Jouw Idee,">Jouw Idee,</span>
+      <span class="title-line gradient-text" data-text="Onze Print.">Onze Print.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Premium 3D printing studio at the heart of Amsterdam.<br>
+      From micro-precision prototypes to architectural masterpieces.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#gallery" class="btn-primary">
+        <span>Explore Gallery</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#ai-lab" class="btn-ghost">
+        <span>Try AI Lab</span>
+        <div class="btn-ghost-glow"></div>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num" data-target="2400">0</span><span class="stat-unit">+</span>
+        <span class="stat-label">Objects Printed</span>
+      </div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat">
+        <span class="stat-num" data-target="99">0</span><span class="stat-unit">%</span>
+        <span class="stat-label">Client Satisfaction</span>
+      </div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat">
+        <span class="stat-num" data-target="48">0</span><span class="stat-unit">h</span>
+        <span class="stat-label">Avg. Turnaround</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span>Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S2 — TRANSFORMATION
+═══════════════════════════════════════════ -->
+<section id="transform">
+  <div class="transform-sticky">
+    <canvas id="transform-canvas" aria-hidden="true"></canvas>
+
+    <div class="transform-panels">
+      <div class="transform-panel" id="tp-1">
+        <div class="tp-tag">01 / CONCEPTION</div>
+        <h2 class="tp-title">Your idea,<br><em>digitized.</em></h2>
+        <p class="tp-desc">Every object begins as pure potential — a wireframe skeleton existing only in mathematical space.</p>
+      </div>
+
+      <div class="transform-panel" id="tp-2">
+        <div class="tp-tag">02 / SYNTHESIS</div>
+        <h2 class="tp-title">Particles<br><em>assemble.</em></h2>
+        <p class="tp-desc">Our AI engine analyzes geometry, optimizes support structures and calculates print paths at nano precision.</p>
+      </div>
+
+      <div class="transform-panel" id="tp-3">
+        <div class="tp-tag">03 / MANIFESTATION</div>
+        <h2 class="tp-title">Reality<br><em>takes form.</em></h2>
+        <p class="tp-desc">Layer by layer, micron by micron — your creation materializes with flawless surface quality.</p>
+      </div>
+    </div>
+
+    <!-- Right-side stats panels per phase -->
+    <div class="tp-stats-wrap">
+      <div class="tp-stats" id="tps-1">
+        <div class="tps-label">Bestandsformaten</div>
+        <div class="tps-row"><span class="tps-val">STL</span><span class="tps-name">Standaard mesh</span></div>
+        <div class="tps-row"><span class="tps-val">OBJ</span><span class="tps-name">Multi-materiaal</span></div>
+        <div class="tps-row"><span class="tps-val">STEP</span><span class="tps-name">CAD precisie</span></div>
+        <div class="tps-row"><span class="tps-val">3MF</span><span class="tps-name">Kleur + textuur</span></div>
+        <div class="tps-divider"></div>
+        <div class="tps-label">Minimale detail</div>
+        <div class="tps-big">0.05 <span>mm</span></div>
+      </div>
+
+      <div class="tp-stats" id="tps-2">
+        <div class="tps-label">AI Optimalisatie</div>
+        <div class="tps-row"><span class="tps-val">47K</span><span class="tps-name">Nodes geanalyseerd</span></div>
+        <div class="tps-row"><span class="tps-val">98%</span><span class="tps-name">Support reductie</span></div>
+        <div class="tps-row"><span class="tps-val">2.4×</span><span class="tps-name">Sneller print pad</span></div>
+        <div class="tps-row"><span class="tps-val">&lt;1s</span><span class="tps-name">Bereken tijd</span></div>
+        <div class="tps-divider"></div>
+        <div class="tps-label">Nauwkeurigheid</div>
+        <div class="tps-big">99.7 <span>%</span></div>
+      </div>
+
+      <div class="tp-stats" id="tps-3">
+        <div class="tps-label">Print specificaties</div>
+        <div class="tps-row"><span class="tps-val">30×30</span><span class="tps-name">Build volume (cm)</span></div>
+        <div class="tps-row"><span class="tps-val">1,760</span><span class="tps-name">Gemiddeld lagen</span></div>
+        <div class="tps-row"><span class="tps-val">48h</span><span class="tps-name">Max doorlooptijd</span></div>
+        <div class="tps-row"><span class="tps-val">12+</span><span class="tps-name">Materialen</span></div>
+        <div class="tps-divider"></div>
+        <div class="tps-label">Klanttevredenheid</div>
+        <div class="tps-big">2400 <span>prints</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrollable spacer -->
+  <div class="transform-spacer"></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S3 — 3D GALLERY
+═══════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="section-header">
+    <div class="section-tag">Virtual Museum</div>
+    <h2 class="section-title">The <em>Gallery</em></h2>
+    <p class="section-sub">Drag to rotate. Hover for cinematic lighting. Every object tells a story.</p>
+  </div>
+
+  <div class="gallery-arena">
+    <canvas id="gallery-canvas" aria-hidden="true"></canvas>
+
+    <div class="gallery-selector">
+      <button class="gal-btn active" data-model="0">
+        <span class="gal-icon">◈</span>
+        <span>Architectural</span>
+      </button>
+      <button class="gal-btn" data-model="1">
+        <span class="gal-icon">⬡</span>
+        <span>Miniatures</span>
+      </button>
+      <button class="gal-btn" data-model="2">
+        <span class="gal-icon">◉</span>
+        <span>Prototypes</span>
+      </button>
+      <button class="gal-btn" data-model="3">
+        <span class="gal-icon">⬢</span>
+        <span>Industrial</span>
+      </button>
+    </div>
+
+    <div class="gallery-info" id="gallery-info">
+      <div class="gi-label">CURRENT OBJECT</div>
+      <div class="gi-name" id="gi-name">Parametric Shell — Type A</div>
+      <div class="gi-specs">
+        <span>Material: <strong id="gi-mat">Resin HD</strong></span>
+        <span>Layer: <strong id="gi-layer">25μm</strong></span>
+        <span>Print time: <strong id="gi-time">4h 22m</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-card reveal-up">
+      <div class="gc-img gc-img-1" aria-label="Custom miniature sculpture"></div>
+      <div class="gc-body">
+        <span class="gc-cat">Miniature</span>
+        <h3>City Block 1:200</h3>
+        <p>Architectural model for Amsterdam urban planning project</p>
+      </div>
+    </div>
+    <div class="gallery-card reveal-up" style="--delay:0.1s">
+      <div class="gc-img gc-img-2" aria-label="Industrial prototype part"></div>
+      <div class="gc-body">
+        <span class="gc-cat">Industrial</span>
+        <h3>Turbine Housing</h3>
+        <p>Aerospace-grade nylon functional prototype, production ready</p>
+      </div>
+    </div>
+    <div class="gallery-card reveal-up" style="--delay:0.2s">
+      <div class="gc-img gc-img-3" aria-label="Custom jewelry piece"></div>
+      <div class="gc-body">
+        <span class="gc-cat">Luxury</span>
+        <h3>Lattice Ring Collection</h3>
+        <p>Generative jewelry design with 99.9% silver-infused resin</p>
+      </div>
+    </div>
+    <div class="gallery-card reveal-up" style="--delay:0.3s">
+      <div class="gc-img gc-img-4" aria-label="Medical device prototype"></div>
+      <div class="gc-body">
+        <span class="gc-cat">Medical</span>
+        <h3>Prosthetic Interface</h3>
+        <p>Patient-specific orthotic device with biocompatible TPU</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S4 — HOW IT WORKS
+═══════════════════════════════════════════ -->
+<section id="process">
+  <div class="section-header">
+    <div class="section-tag">The Journey</div>
+    <h2 class="section-title">From <em>Idea</em> to <em>Object</em></h2>
+    <p class="section-sub">Five stages of transformation. Each one a miracle of modern engineering.</p>
+  </div>
+
+  <div class="process-track">
+    <div class="process-line" id="process-line" aria-hidden="true"></div>
+
+    <div class="process-step reveal-up" data-step="0">
+      <div class="ps-node">
+        <div class="ps-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="ps-num">01</div>
+      </div>
+      <div class="ps-body">
+        <h3>Your Idea</h3>
+        <p>Share your vision. We accept sketches, CAD files, photos, or pure imagination. Our team translates concepts into printable geometry.</p>
+        <div class="ps-tags">
+          <span>Sketch</span><span>CAD</span><span>Reference</span><span>Napkin drawing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step reveal-up" data-step="1" style="--delay:0.1s">
+      <div class="ps-node">
+        <div class="ps-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        <div class="ps-num">02</div>
+      </div>
+      <div class="ps-body">
+        <h3>AI Processing</h3>
+        <p>Our AI engine analyzes your model, suggests optimizations, calculates structural integrity, and generates the optimal print configuration.</p>
+        <div class="ps-tags">
+          <span>Topology</span><span>Support Gen</span><span>Slicing</span><span>Simulation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step reveal-up" data-step="2" style="--delay:0.2s">
+      <div class="ps-node">
+        <div class="ps-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <div class="ps-num">03</div>
+      </div>
+      <div class="ps-body">
+        <h3>3D Modeling</h3>
+        <p>If you don't have a CAD file, our expert modelers craft your vision in 3D with millimeter precision, ready for production.</p>
+        <div class="ps-tags">
+          <span>Rhino</span><span>Blender</span><span>SolidWorks</span><span>ZBrush</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step reveal-up" data-step="3" style="--delay:0.3s">
+      <div class="ps-node">
+        <div class="ps-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <div class="ps-num">04</div>
+      </div>
+      <div class="ps-body">
+        <h3>Precision Printing</h3>
+        <p>Your object materializes layer by layer in our climate-controlled print room. Resolution down to 25 microns — thinner than a human hair.</p>
+        <div class="ps-tags">
+          <span>SLA</span><span>FDM</span><span>SLS</span><span>MJF</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step reveal-up" data-step="4" style="--delay:0.4s">
+      <div class="ps-node ps-node-final">
+        <div class="ps-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 12l5 5 9-9"/>
+          </svg>
+        </div>
+        <div class="ps-num">05</div>
+      </div>
+      <div class="ps-body">
+        <h3>Delivered to You</h3>
+        <p>Post-processed, quality inspected, and beautifully packaged. Delivered within Amsterdam same day. Worldwide within 5 days.</p>
+        <div class="ps-tags">
+          <span>Finishing</span><span>QC Scan</span><span>Same-day</span><span>Worldwide</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S5 — AI TERMINAL
+═══════════════════════════════════════════ -->
+<section id="ai-lab">
+  <div class="section-header">
+    <div class="section-tag">AI Print Engine</div>
+    <h2 class="section-title">Print <em>Anything.</em></h2>
+    <p class="section-sub">Type what you want. Our AI will conceptualize, estimate, and quote it in seconds.</p>
+  </div>
+
+  <div class="terminal-layout">
+    <div class="terminal-window" id="terminal-window">
+      <div class="terminal-titlebar">
+        <div class="terminal-dots">
+          <span class="td-red"></span>
+          <span class="td-yellow"></span>
+          <span class="td-green"></span>
+        </div>
+        <div class="terminal-title">premiumprints020 AI — Print Estimator v3.1</div>
+        <div class="terminal-status">
+          <span class="ts-dot"></span>
+          <span>ONLINE</span>
+        </div>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-output" id="terminal-output">
+          <div class="to-line to-system">premiumprints020 PRINT ENGINE INITIALIZED</div>
+          <div class="to-line to-system">MATERIAL DATABASE LOADED — 47 MATERIALS AVAILABLE</div>
+          <div class="to-line to-system">AI MODEL ACTIVE — READY FOR INPUT</div>
+          <div class="to-line to-gap"></div>
+          <div class="to-line to-prompt">Type anything you want to print below ↓</div>
+        </div>
+        <div class="terminal-input-row">
+          <span class="ti-prompt">&gt;</span>
+          <input
+            type="text"
+            id="terminal-input"
+            class="terminal-input"
+            placeholder="e.g. a dragon drinking coffee at 1:50 scale..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="ti-submit" id="ti-submit" aria-label="Generate estimate">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-result-panel" id="ai-result-panel">
+      <div class="arp-header">
+        <span class="arp-tag">ESTIMATE GENERATED</span>
+        <span class="arp-id" id="arp-id">#AX-000000</span>
+      </div>
+
+      <div class="arp-visual" id="arp-visual">
+        <canvas id="arp-canvas" aria-hidden="true"></canvas>
+        <div class="arp-label" id="arp-label">Awaiting input...</div>
+      </div>
+
+      <div class="arp-specs" id="arp-specs">
+        <div class="arp-spec">
+          <span class="as-label">Print Time</span>
+          <span class="as-value" id="arp-time">—</span>
+        </div>
+        <div class="arp-spec">
+          <span class="as-label">Material</span>
+          <span class="as-value" id="arp-material">—</span>
+        </div>
+        <div class="arp-spec">
+          <span class="as-label">Resolution</span>
+          <span class="as-value" id="arp-resolution">—</span>
+        </div>
+        <div class="arp-spec">
+          <span class="as-label">Estimated Cost</span>
+          <span class="as-value as-price" id="arp-price">—</span>
+        </div>
+      </div>
+
+      <a href="#contact-cta" class="arp-cta" id="arp-cta" style="display:none">
+        Order This Print →
+      </a>
+    </div>
+  </div>
+
+  <div class="ai-suggestions">
+    <span class="as-label-text">Try asking for:</span>
+    <div class="ai-chips" id="ai-chips">
+      <button class="ai-chip" data-query="a miniature Amsterdam canal house at 1:100 scale">Canal House</button>
+      <button class="ai-chip" data-query="a functional drone frame optimized for FPV racing">Drone Frame</button>
+      <button class="ai-chip" data-query="a dragon drinking coffee — max detail">Dragon Coffee</button>
+      <button class="ai-chip" data-query="a replacement gear for a vintage watch">Watch Gear</button>
+      <button class="ai-chip" data-query="a life-size human skull with LED housing inside">LED Skull</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S6 — LIVE UNIVERSE
+═══════════════════════════════════════════ -->
+<section id="live-universe">
+  <div class="section-header">
+    <div class="section-tag">Real-time Activity</div>
+    <h2 class="section-title">Live Print <em>Universe</em></h2>
+    <p class="section-sub">Right now, across our studio — prints in progress, completed, shipped.</p>
+  </div>
+
+  <div class="universe-layout">
+    <div class="universe-globe-wrap">
+      <canvas id="globe-canvas" aria-hidden="true"></canvas>
+      <div class="globe-stat-overlay">
+        <div class="gso-item">
+          <span class="gso-num" id="gso-printing">12</span>
+          <span class="gso-label">Printing Now</span>
+        </div>
+        <div class="gso-item">
+          <span class="gso-num" id="gso-today">47</span>
+          <span class="gso-label">Completed Today</span>
+        </div>
+        <div class="gso-item">
+          <span class="gso-num" id="gso-cities">23</span>
+          <span class="gso-label">Cities Reached</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="live-feed" id="live-feed">
+      <div class="lf-header">
+        <div class="lf-pulse" aria-hidden="true"></div>
+        <span>Live Activity</span>
+      </div>
+      <div class="lf-items" id="lf-items">
+        <!-- JS populated -->
+      </div>
+    </div>
+  </div>
+
+  <div class="universe-materials">
+    <div class="section-tag" style="margin-bottom:2rem">Material Breakdown — This Week</div>
+    <div class="mat-bars" id="mat-bars">
+      <div class="mat-bar-item">
+        <span class="mb-label">Resin HD</span>
+        <div class="mb-track"><div class="mb-fill" style="--pct:78%;--clr:#ffd700"></div></div>
+        <span class="mb-pct">78%</span>
+      </div>
+      <div class="mat-bar-item">
+        <span class="mb-label">PLA Carbon</span>
+        <div class="mb-track"><div class="mb-fill" style="--pct:54%;--clr:#f59e0b"></div></div>
+        <span class="mb-pct">54%</span>
+      </div>
+      <div class="mat-bar-item">
+        <span class="mb-label">Nylon PA12</span>
+        <div class="mb-track"><div class="mb-fill" style="--pct:41%;--clr:#ff8c00"></div></div>
+        <span class="mb-pct">41%</span>
+      </div>
+      <div class="mat-bar-item">
+        <span class="mb-label">TPU Flex</span>
+        <div class="mb-track"><div class="mb-fill" style="--pct:29%;--clr:#ffd700"></div></div>
+        <span class="mb-pct">29%</span>
+      </div>
+      <div class="mat-bar-item">
+        <span class="mb-label">Metal PLA</span>
+        <div class="mb-track"><div class="mb-fill" style="--pct:17%;--clr:#00ff88"></div></div>
+        <span class="mb-pct">17%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S7 — CUSTOMER SHOWCASE
+═══════════════════════════════════════════ -->
+<section id="showcase">
+  <div class="section-header">
+    <div class="section-tag">Client Stories</div>
+    <h2 class="section-title">Holographic <em>Testimonials</em></h2>
+    <p class="section-sub">Real projects. Real people. Extraordinary results.</p>
+  </div>
+
+  <div class="holo-cards-container" id="holo-cards-container">
+
+    <div class="holo-card" data-tilt>
+      <div class="hc-glow hc-glow-cyan"></div>
+      <div class="hc-inner">
+        <div class="hc-project-img hc-img-1" aria-label="Architectural model"></div>
+        <div class="hc-content">
+          <div class="hc-stars">★★★★★</div>
+          <blockquote class="hc-quote">
+            "premiumprints020 printed our entire architectural model in 48 hours. The detail is absolutely insane — you can see individual window frames at 1:500 scale."
+          </blockquote>
+          <div class="hc-author">
+            <div class="hc-avatar">MK</div>
+            <div>
+              <strong>Maaike K.</strong>
+              <span>Architecture Studio BV, Amsterdam</span>
+            </div>
+          </div>
+          <div class="hc-result">
+            <span class="hcr-label">Project:</span>
+            <span>Urban District Model — 1200 components</span>
+          </div>
+        </div>
+      </div>
+      <div class="hc-scan-line"></div>
+    </div>
+
+    <div class="holo-card" data-tilt>
+      <div class="hc-glow hc-glow-purple"></div>
+      <div class="hc-inner">
+        <div class="hc-project-img hc-img-2" aria-label="Custom prosthetic"></div>
+        <div class="hc-content">
+          <div class="hc-stars">★★★★★</div>
+          <blockquote class="hc-quote">
+            "They printed a patient-specific prosthetic interface that fit perfectly on the first try. The medical-grade quality is unmatched in the Netherlands."
+          </blockquote>
+          <div class="hc-author">
+            <div class="hc-avatar">DR</div>
+            <div>
+              <strong>Dr. Roos V.</strong>
+              <span>Amsterdam UMC — Orthopedics</span>
+            </div>
+          </div>
+          <div class="hc-result">
+            <span class="hcr-label">Project:</span>
+            <span>Biocompatible TPU Prosthetic — 0.1mm tolerance</span>
+          </div>
+        </div>
+      </div>
+      <div class="hc-scan-line"></div>
+    </div>
+
+    <div class="holo-card" data-tilt>
+      <div class="hc-glow hc-glow-pink"></div>
+      <div class="hc-inner">
+        <div class="hc-project-img hc-img-3" aria-label="Designer jewelry"></div>
+        <div class="hc-content">
+          <div class="hc-stars">★★★★★</div>
+          <blockquote class="hc-quote">
+            "I sent a sketch. They sent back 12 ring variants within a day. The generative jewelry line now sells in Bijenkorf. premiumprints020 changed my business."
+          </blockquote>
+          <div class="hc-author">
+            <div class="hc-avatar">EB</div>
+            <div>
+              <strong>Eva B.</strong>
+              <span>Designer — Studio FORM</span>
+            </div>
+          </div>
+          <div class="hc-result">
+            <span class="hcr-label">Project:</span>
+            <span>Lattice Jewelry Collection — 48 unique pieces</span>
+          </div>
+        </div>
+      </div>
+      <div class="hc-scan-line"></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S8 — VIRAL SECTION
+═══════════════════════════════════════════ -->
+<section id="viral">
+  <div class="section-header">
+    <div class="section-tag">The Hall of Fame</div>
+    <h2 class="section-title">Things our clients<br>asked us to <em>print</em></h2>
+    <p class="section-sub">We asked no questions. We printed everything.</p>
+  </div>
+
+  <div class="viral-grid" id="viral-grid">
+
+    <div class="viral-item vi-large reveal-up" style="--delay:0s">
+      <div class="vi-emoji">🐉</div>
+      <h3>A life-size dragon skull</h3>
+      <p>For a Game of Thrones finale party. Client cried when they saw it.</p>
+      <div class="vi-meta">
+        <span>47 hours</span>
+        <span>Resin HD</span>
+        <span>Legendary</span>
+      </div>
+    </div>
+
+    <div class="viral-item reveal-up" style="--delay:0.05s">
+      <div class="vi-emoji">☕</div>
+      <h3>A coffee cup that says "I hate Mondays"</h3>
+      <p>Ordered at 3am on a Sunday. Delivered Monday morning.</p>
+      <div class="vi-meta">
+        <span>4 hours</span>
+        <span>Food-safe PLA</span>
+      </div>
+    </div>
+
+    <div class="viral-item reveal-up" style="--delay:0.1s">
+      <div class="vi-emoji">🔩</div>
+      <h3>IKEA part that doesn't exist</h3>
+      <p>The Kallax bracket that IKEA forgot to invent. We invented it.</p>
+      <div class="vi-meta">
+        <span>2 hours</span>
+        <span>ABS</span>
+        <span>Priceless</span>
+      </div>
+    </div>
+
+    <div class="viral-item vi-tall reveal-up" style="--delay:0.15s">
+      <div class="vi-emoji">🏠</div>
+      <h3>An exact replica of their childhood home</h3>
+      <p>As a gift for their grandmother's 90th birthday. She wept for 20 minutes.</p>
+      <div class="vi-meta">
+        <span>31 hours</span>
+        <span>Multicolor PLA</span>
+        <span>Emotional damage</span>
+      </div>
+    </div>
+
+    <div class="viral-item reveal-up" style="--delay:0.2s">
+      <div class="vi-emoji">🦆</div>
+      <h3>75 rubber ducks for an office prank</h3>
+      <p>The CEO still doesn't know it was us.</p>
+      <div class="vi-meta">
+        <span>12 hours</span>
+        <span>TPU Flex</span>
+      </div>
+    </div>
+
+    <div class="viral-item reveal-up" style="--delay:0.25s">
+      <div class="vi-emoji">🎸</div>
+      <h3>A fully playable guitar body</h3>
+      <p>Nylon strings, carbon fibre composite. It actually sounds incredible.</p>
+      <div class="vi-meta">
+        <span>38 hours</span>
+        <span>Carbon CF</span>
+        <span>Grammy pending</span>
+      </div>
+    </div>
+
+    <div class="viral-item reveal-up" style="--delay:0.3s">
+      <div class="vi-emoji">🧠</div>
+      <h3>A 1:1 replica human brain</h3>
+      <p>For a neuroscience museum. Fully detailed with every fold.</p>
+      <div class="vi-meta">
+        <span>18 hours</span>
+        <span>Resin SLA</span>
+      </div>
+    </div>
+
+    <div class="viral-item vi-large reveal-up" style="--delay:0.35s">
+      <div class="vi-emoji">🌙</div>
+      <h3>A lamp that looks exactly like the Moon</h3>
+      <p>With real NASA elevation data. Now sold in 14 countries.</p>
+      <div class="vi-meta">
+        <span>22 hours</span>
+        <span>Translucent PLA</span>
+        <span>Viral on TikTok</span>
+      </div>
+    </div>
+
+    <div class="viral-item reveal-up" style="--delay:0.4s">
+      <div class="vi-emoji">💍</div>
+      <h3>An engagement ring proposal box</h3>
+      <p>With a secret compartment that only opens when her name is said aloud. (The ring wasn't 3D printed. The moment was.)</p>
+      <div class="vi-meta">
+        <span>She said yes</span>
+        <span>Gold resin</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="viral-cta">
+    <p>Have something weird you want to print?</p>
+    <a href="#ai-lab" class="btn-primary">Challenge Us →</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S9 — PRICING
+═══════════════════════════════════════════ -->
+<section id="pricing">
+  <div class="section-header">
+    <div class="section-tag">Investment</div>
+    <h2 class="section-title">Premium <em>Plans</em></h2>
+    <p class="section-sub">Transparent pricing. No surprises. Luxury at every tier.</p>
+  </div>
+
+  <div class="pricing-grid">
+
+    <div class="pricing-card reveal-up" data-tilt>
+      <div class="pc-glow"></div>
+      <div class="pc-inner">
+        <div class="pc-tier">Maker</div>
+        <div class="pc-price">
+          <span class="pc-currency">€</span>
+          <span class="pc-amount">49</span>
+          <span class="pc-period">/print</span>
+        </div>
+        <p class="pc-desc">Perfect for personal projects, gifts, and one-off creations.</p>
+        <ul class="pc-features">
+          <li><span class="pcf-check">✦</span> Up to 20×20×20cm build volume</li>
+          <li><span class="pcf-check">✦</span> 5 material options</li>
+          <li><span class="pcf-check">✦</span> 100μm resolution</li>
+          <li><span class="pcf-check">✦</span> 72h turnaround</li>
+          <li><span class="pcf-check">✦</span> Standard packaging</li>
+          <li class="pcf-dim"><span class="pcf-x">✕</span> Priority queue</li>
+          <li class="pcf-dim"><span class="pcf-x">✕</span> Dedicated designer</li>
+        </ul>
+        <a href="#contact-cta" class="pc-btn pc-btn-ghost">Get Started</a>
+      </div>
+    </div>
+
+    <div class="pricing-card pricing-card-featured reveal-up" data-tilt style="--delay:0.1s">
+      <div class="pc-badge">Most Popular</div>
+      <div class="pc-glow pc-glow-featured"></div>
+      <div class="pc-inner">
+        <div class="pc-tier">Studio</div>
+        <div class="pc-price">
+          <span class="pc-currency">€</span>
+          <span class="pc-amount">299</span>
+          <span class="pc-period">/month</span>
+        </div>
+        <p class="pc-desc">For designers, startups, and creative professionals who print regularly.</p>
+        <ul class="pc-features">
+          <li><span class="pcf-check">✦</span> Unlimited prints up to 50cm</li>
+          <li><span class="pcf-check">✦</span> All 47 materials</li>
+          <li><span class="pcf-check">✦</span> 25μm resolution</li>
+          <li><span class="pcf-check">✦</span> 24h turnaround</li>
+          <li><span class="pcf-check">✦</span> Priority queue</li>
+          <li><span class="pcf-check">✦</span> Premium packaging</li>
+          <li class="pcf-dim"><span class="pcf-x">✕</span> Dedicated designer</li>
+        </ul>
+        <a href="#contact-cta" class="pc-btn pc-btn-primary">Start Studio Plan</a>
+      </div>
+    </div>
+
+    <div class="pricing-card reveal-up" data-tilt style="--delay:0.2s">
+      <div class="pc-glow pc-glow-gold"></div>
+      <div class="pc-inner">
+        <div class="pc-tier">Enterprise</div>
+        <div class="pc-price">
+          <span class="pc-amount" style="font-size:2rem;margin-top:.5rem">Custom</span>
+        </div>
+        <p class="pc-desc">For agencies, manufacturers, and brands with complex, high-volume needs.</p>
+        <ul class="pc-features">
+          <li><span class="pcf-check">✦</span> Unlimited volume & scale</li>
+          <li><span class="pcf-check">✦</span> All materials + metal</li>
+          <li><span class="pcf-check">✦</span> Micron-level precision</li>
+          <li><span class="pcf-check">✦</span> Same-day production</li>
+          <li><span class="pcf-check">✦</span> Dedicated print lab</li>
+          <li><span class="pcf-check">✦</span> Senior designer on-call</li>
+          <li><span class="pcf-check">✦</span> White-label service</li>
+        </ul>
+        <a href="#contact-cta" class="pc-btn pc-btn-gold">Contact Enterprise</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CONTACT CTA
+═══════════════════════════════════════════ -->
+<section id="contact-cta">
+  <div class="cta-section-inner">
+    <div class="cta-glow-left" aria-hidden="true"></div>
+    <div class="cta-glow-right" aria-hidden="true"></div>
+
+    <div class="section-tag">Ready?</div>
+    <h2 class="cta-title">Let's create<br><em>something extraordinary.</em></h2>
+    <p class="cta-sub">Upload your file, describe your idea, or just say hello. We respond within 2 hours.</p>
+
+    <form class="cta-form" id="cta-form" novalidate>
+      <div class="cta-form-row">
+        <div class="cta-field">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" placeholder="Your name" required autocomplete="name" />
+        </div>
+        <div class="cta-field">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" placeholder="your@email.com" required autocomplete="email" />
+        </div>
+      </div>
+      <div class="cta-field">
+        <label for="cf-project">Project Description</label>
+        <textarea id="cf-project" rows="4" placeholder="Tell us what you want to print, or paste a link to your CAD file..." required></textarea>
+      </div>
+      <div class="cta-form-footer">
+        <button type="submit" class="btn-primary btn-primary-lg">
+          <span>Send Project Brief</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <span class="cta-note">Or email us directly: <a href="mailto:hello@premiumprints020.nl">hello@premiumprints020.nl</a></span>
+      </div>
+    </form>
+
+    <div class="cta-success" id="cta-success">
+      <div class="cta-success-icon">✦</div>
+      <h3>Project brief received.</h3>
+      <p>We'll review and respond within 2 hours. Check your inbox.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     S10 — FOOTER / AMSTERDAM SKYLINE
+═══════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="amsterdam-skyline" id="amsterdam-skyline" aria-hidden="true">
+    <svg id="skyline-svg" viewBox="0 0 1400 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+      <!-- Canal water reflections -->
+      <defs>
+        <linearGradient id="water-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffd700" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.03"/>
+        </linearGradient>
+        <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#050508"/>
+          <stop offset="100%" stop-color="#0a0a14"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Sky background -->
+      <rect x="0" y="0" width="1400" height="200" fill="url(#sky-grad)"/>
+
+      <!-- Canal water -->
+      <rect x="0" y="200" width="1400" height="80" fill="url(#water-grad)"/>
+      <path d="M0,200 Q350,195 700,200 Q1050,205 1400,200 L1400,280 L0,280 Z" fill="rgba(255,215,0,0.04)"/>
+
+      <!-- Water ripples -->
+      <g class="water-ripples" opacity="0.3">
+        <ellipse cx="200" cy="220" rx="80" ry="4" fill="none" stroke="#00d4ff" stroke-width="0.5" class="ripple"/>
+        <ellipse cx="500" cy="235" rx="120" ry="5" fill="none" stroke="#00d4ff" stroke-width="0.5" class="ripple" style="animation-delay:0.5s"/>
+        <ellipse cx="900" cy="215" rx="100" ry="4" fill="none" stroke="#a855f7" stroke-width="0.5" class="ripple" style="animation-delay:1s"/>
+        <ellipse cx="1200" cy="228" rx="90" ry="4" fill="none" stroke="#00d4ff" stroke-width="0.5" class="ripple" style="animation-delay:1.5s"/>
+      </g>
+
+      <!-- Buildings - Amsterdam canal house style -->
+      <!-- Far left -->
+      <g class="sky-building" data-idx="0">
+        <rect x="20" y="130" width="35" height="70" fill="#0a0a14" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <polygon points="20,130 37.5,100 55,130" fill="#0d0d1a" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <rect x="28" y="150" width="8" height="10" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="38" y="150" width="8" height="10" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="28" y="165" width="8" height="10" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+      </g>
+
+      <g class="sky-building" data-idx="1">
+        <rect x="60" y="110" width="28" height="90" fill="#080810" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <polygon points="60,110 74,80 88,110" fill="#0a0a18" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <circle cx="74" cy="72" r="4" fill="rgba(255,215,0,0.4)" class="sky-ornament"/>
+        <rect x="65" y="130" width="7" height="8" fill="rgba(255,215,0,0.3)" class="sky-window"/>
+        <rect x="76" y="130" width="7" height="8" fill="rgba(245,158,11,0.25)" class="sky-window"/>
+        <rect x="65" y="148" width="7" height="8" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="76" y="148" width="7" height="8" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+        <rect x="65" y="166" width="7" height="8" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+      </g>
+
+      <g class="sky-building" data-idx="2">
+        <rect x="95" y="120" width="40" height="80" fill="#0c0c16" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+        <path d="M95,120 Q115,95 135,120" fill="#0e0e1c" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+        <rect x="100" y="138" width="10" height="12" fill="rgba(255,140,0,0.2)" class="sky-window"/>
+        <rect x="116" y="138" width="10" height="12" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="100" y="156" width="10" height="12" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="116" y="156" width="10" height="12" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="108" y="174" width="14" height="26" fill="rgba(255,215,0,0.05)" class="sky-door"/>
+      </g>
+
+      <!-- AXIOM building (tallest, center-left) -->
+      <g class="sky-building sky-building-axiom" data-idx="3">
+        <rect x="145" y="60" width="50" height="140" fill="#080812" stroke="rgba(255,215,0,0.15)" stroke-width="0.5"/>
+        <polygon points="145,60 170,20 195,60" fill="#0a0a18" stroke="rgba(255,215,0,0.2)" stroke-width="0.5"/>
+        <circle cx="170" cy="14" r="5" fill="#ffd700" class="sky-beacon" filter="url(#glow)"/>
+        <rect x="150" y="80" width="14" height="16" fill="rgba(255,215,0,0.35)" class="sky-window"/>
+        <rect x="170" y="80" width="14" height="16" fill="rgba(255,215,0,0.25)" class="sky-window"/>
+        <rect x="150" y="102" width="14" height="16" fill="rgba(245,158,11,0.35)" class="sky-window"/>
+        <rect x="170" y="102" width="14" height="16" fill="rgba(255,215,0,0.3)" class="sky-window"/>
+        <rect x="150" y="124" width="14" height="16" fill="rgba(255,215,0,0.25)" class="sky-window"/>
+        <rect x="170" y="124" width="14" height="16" fill="rgba(255,140,0,0.25)" class="sky-window"/>
+        <rect x="150" y="146" width="14" height="16" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="170" y="146" width="14" height="16" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="155" y="168" width="20" height="32" fill="rgba(255,215,0,0.08)" class="sky-door"/>
+        <!-- Axiom sign glow -->
+        <text x="143" y="192" font-size="5" fill="rgba(255,215,0,0.6)" font-family="monospace">PP020</text>
+      </g>
+
+      <g class="sky-building" data-idx="4">
+        <rect x="200" y="90" width="32" height="110" fill="#0a0a14" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+        <rect x="204" y="72" width="24" height="20" fill="#0c0c16" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <rect x="206" y="60" width="20" height="14" fill="#0c0c18" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <rect x="205" y="105" width="8" height="10" fill="rgba(245,158,11,0.3)" class="sky-window"/>
+        <rect x="218" y="105" width="8" height="10" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="205" y="122" width="8" height="10" fill="rgba(255,215,0,0.25)" class="sky-window"/>
+        <rect x="218" y="122" width="8" height="10" fill="rgba(255,140,0,0.2)" class="sky-window"/>
+        <rect x="205" y="139" width="8" height="10" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="218" y="139" width="8" height="10" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="205" y="156" width="8" height="10" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+      </g>
+
+      <g class="sky-building" data-idx="5">
+        <rect x="240" y="115" width="26" height="85" fill="#0a0a12" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+        <polygon points="240,115 253,88 266,115" fill="#0c0c18"/>
+        <circle cx="253" cy="82" r="3" fill="rgba(255,140,0,0.6)" class="sky-ornament"/>
+        <rect x="244" y="130" width="7" height="8" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="255" y="130" width="7" height="8" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="244" y="148" width="7" height="8" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="255" y="148" width="7" height="8" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+        <rect x="244" y="166" width="7" height="8" fill="rgba(255,140,0,0.15)" class="sky-window"/>
+      </g>
+
+      <!-- Middle section - wider gap -->
+      <g class="sky-building" data-idx="6">
+        <rect x="620" y="100" width="44" height="100" fill="#080810" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <polygon points="620,100 642,68 664,100" fill="#0a0a16"/>
+        <circle cx="642" cy="62" r="4" fill="rgba(245,158,11,0.7)" class="sky-beacon"/>
+        <rect x="626" y="118" width="10" height="12" fill="rgba(245,158,11,0.3)" class="sky-window"/>
+        <rect x="642" y="118" width="10" height="12" fill="rgba(255,215,0,0.25)" class="sky-window"/>
+        <rect x="626" y="138" width="10" height="12" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="642" y="138" width="10" height="12" fill="rgba(245,158,11,0.25)" class="sky-window"/>
+        <rect x="626" y="158" width="10" height="12" fill="rgba(255,140,0,0.2)" class="sky-window"/>
+        <rect x="642" y="158" width="10" height="12" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="633" y="174" width="16" height="26" fill="rgba(245,158,11,0.08)" class="sky-door"/>
+      </g>
+
+      <g class="sky-building" data-idx="7">
+        <rect x="670" y="125" width="30" height="75" fill="#0a0a14"/>
+        <path d="M670,125 Q685,100 700,125" fill="#0c0c1a"/>
+        <rect x="675" y="142" width="8" height="10" fill="rgba(255,215,0,0.25)" class="sky-window"/>
+        <rect x="688" y="142" width="8" height="10" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="675" y="160" width="8" height="10" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="688" y="160" width="8" height="10" fill="rgba(255,140,0,0.15)" class="sky-window"/>
+      </g>
+
+      <g class="sky-building" data-idx="8">
+        <rect x="706" y="80" width="48" height="120" fill="#07070f" stroke="rgba(255,215,0,0.1)" stroke-width="0.5"/>
+        <rect x="710" y="60" width="40" height="22" fill="#09091a"/>
+        <rect x="722" y="42" width="16" height="20" fill="#0a0a1c"/>
+        <rect x="728" y="30" width="4" height="14" fill="rgba(255,215,0,0.8)"/>
+        <rect x="711" y="95" width="11" height="13" fill="rgba(255,215,0,0.3)" class="sky-window"/>
+        <rect x="727" y="95" width="11" height="13" fill="rgba(245,158,11,0.3)" class="sky-window"/>
+        <rect x="742" y="95" width="8" height="13" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="711" y="115" width="11" height="13" fill="rgba(245,158,11,0.25)" class="sky-window"/>
+        <rect x="727" y="115" width="11" height="13" fill="rgba(255,215,0,0.25)" class="sky-window"/>
+        <rect x="742" y="115" width="8" height="13" fill="rgba(255,140,0,0.2)" class="sky-window"/>
+        <rect x="711" y="135" width="11" height="13" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="727" y="135" width="11" height="13" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="742" y="135" width="8" height="13" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="711" y="155" width="11" height="13" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="727" y="155" width="11" height="13" fill="rgba(255,140,0,0.15)" class="sky-window"/>
+        <rect x="726" y="175" width="18" height="25" fill="rgba(255,215,0,0.06)" class="sky-door"/>
+      </g>
+
+      <!-- Right side buildings -->
+      <g class="sky-building" data-idx="9">
+        <rect x="1100" y="105" width="36" height="95" fill="#0a0a14" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+        <polygon points="1100,105 1118,76 1136,105" fill="#0c0c1a"/>
+        <circle cx="1118" cy="70" r="3.5" fill="rgba(255,140,0,0.6)" class="sky-ornament"/>
+        <rect x="1105" y="120" width="9" height="11" fill="rgba(255,140,0,0.25)" class="sky-window"/>
+        <rect x="1119" y="120" width="9" height="11" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="1105" y="138" width="9" height="11" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="1119" y="138" width="9" height="11" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="1105" y="156" width="9" height="11" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+        <rect x="1119" y="156" width="9" height="11" fill="rgba(255,140,0,0.1)" class="sky-window"/>
+        <rect x="1109" y="173" width="14" height="27" fill="rgba(255,140,0,0.05)" class="sky-door"/>
+      </g>
+
+      <g class="sky-building" data-idx="10">
+        <rect x="1142" y="90" width="30" height="110" fill="#080810"/>
+        <rect x="1146" y="72" width="22" height="20" fill="#0a0a14"/>
+        <rect x="1150" y="58" width="14" height="16" fill="#0c0c18"/>
+        <rect x="1147" y="106" width="8" height="10" fill="rgba(255,215,0,0.3)" class="sky-window"/>
+        <rect x="1160" y="106" width="8" height="10" fill="rgba(245,158,11,0.25)" class="sky-window"/>
+        <rect x="1147" y="124" width="8" height="10" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="1160" y="124" width="8" height="10" fill="rgba(255,140,0,0.2)" class="sky-window"/>
+        <rect x="1147" y="142" width="8" height="10" fill="rgba(245,158,11,0.15)" class="sky-window"/>
+        <rect x="1160" y="142" width="8" height="10" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="1147" y="160" width="8" height="10" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+      </g>
+
+      <g class="sky-building sky-building-axiom" data-idx="11">
+        <rect x="1178" y="55" width="55" height="145" fill="#06060e" stroke="rgba(255,215,0,0.12)" stroke-width="0.5"/>
+        <polygon points="1178,55 1205,15 1233,55" fill="#09091a"/>
+        <circle cx="1205" cy="9" r="5" fill="#f59e0b" class="sky-beacon"/>
+        <rect x="1184" y="72" width="14" height="16" fill="rgba(245,158,11,0.35)" class="sky-window"/>
+        <rect x="1202" y="72" width="14" height="16" fill="rgba(255,215,0,0.3)" class="sky-window"/>
+        <rect x="1220" y="72" width="8" height="16" fill="rgba(245,158,11,0.25)" class="sky-window"/>
+        <rect x="1184" y="95" width="14" height="16" fill="rgba(255,215,0,0.25)" class="sky-window"/>
+        <rect x="1202" y="95" width="14" height="16" fill="rgba(255,140,0,0.25)" class="sky-window"/>
+        <rect x="1220" y="95" width="8" height="16" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="1184" y="118" width="14" height="16" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="1202" y="118" width="14" height="16" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="1220" y="118" width="8" height="16" fill="rgba(255,140,0,0.15)" class="sky-window"/>
+        <rect x="1184" y="141" width="14" height="16" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="1202" y="141" width="14" height="16" fill="rgba(245,158,11,0.15)" class="sky-window"/>
+        <rect x="1220" y="141" width="8" height="16" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+        <rect x="1184" y="164" width="14" height="16" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+        <rect x="1202" y="164" width="14" height="16" fill="rgba(245,158,11,0.1)" class="sky-window"/>
+        <rect x="1192" y="182" width="24" height="18" fill="rgba(245,158,11,0.06)" class="sky-door"/>
+      </g>
+
+      <g class="sky-building" data-idx="12">
+        <rect x="1240" y="120" width="28" height="80" fill="#0a0a14"/>
+        <path d="M1240,120 Q1254,95 1268,120" fill="#0c0c1a"/>
+        <rect x="1245" y="136" width="7" height="9" fill="rgba(255,215,0,0.2)" class="sky-window"/>
+        <rect x="1257" y="136" width="7" height="9" fill="rgba(245,158,11,0.15)" class="sky-window"/>
+        <rect x="1245" y="153" width="7" height="9" fill="rgba(255,140,0,0.15)" class="sky-window"/>
+        <rect x="1257" y="153" width="7" height="9" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+        <rect x="1245" y="170" width="7" height="9" fill="rgba(255,215,0,0.08)" class="sky-window"/>
+      </g>
+
+      <g class="sky-building" data-idx="13">
+        <rect x="1274" y="130" width="36" height="70" fill="#080810"/>
+        <polygon points="1274,130 1292,105 1310,130" fill="#0a0a18"/>
+        <circle cx="1292" cy="100" r="3" fill="rgba(255,215,0,0.5)" class="sky-ornament"/>
+        <rect x="1279" y="148" width="9" height="10" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="1294" y="148" width="9" height="10" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="1279" y="164" width="9" height="10" fill="rgba(255,215,0,0.12)" class="sky-window"/>
+        <rect x="1294" y="164" width="9" height="10" fill="rgba(255,140,0,0.1)" class="sky-window"/>
+      </g>
+
+      <g class="sky-building" data-idx="14">
+        <rect x="1316" y="115" width="32" height="85" fill="#0a0a12"/>
+        <rect x="1320" y="95" width="24" height="22" fill="#0c0c18"/>
+        <rect x="1324" y="78" width="16" height="19" fill="#0e0e1c"/>
+        <rect x="1330" y="60" width="4" height="20" fill="rgba(245,158,11,0.6)"/>
+        <rect x="1321" y="132" width="9" height="11" fill="rgba(255,215,0,0.25)" class="sky-window"/>
+        <rect x="1335" y="132" width="9" height="11" fill="rgba(245,158,11,0.2)" class="sky-window"/>
+        <rect x="1321" y="150" width="9" height="11" fill="rgba(255,140,0,0.18)" class="sky-window"/>
+        <rect x="1335" y="150" width="9" height="11" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="1321" y="168" width="9" height="11" fill="rgba(245,158,11,0.12)" class="sky-window"/>
+        <rect x="1335" y="168" width="9" height="11" fill="rgba(255,215,0,0.1)" class="sky-window"/>
+      </g>
+
+      <g class="sky-building" data-idx="15">
+        <rect x="1354" y="140" width="46" height="60" fill="#080810"/>
+        <polygon points="1354,140 1377,112 1400,140" fill="#0a0a16"/>
+        <rect x="1360" y="156" width="10" height="12" fill="rgba(255,215,0,0.15)" class="sky-window"/>
+        <rect x="1376" y="156" width="10" height="12" fill="rgba(245,158,11,0.12)" class="sky-window"/>
+        <rect x="1360" y="174" width="10" height="12" fill="rgba(255,140,0,0.1)" class="sky-window"/>
+        <rect x="1376" y="174" width="10" height="12" fill="rgba(255,215,0,0.08)" class="sky-window"/>
+      </g>
+
+      <!-- Reflections in canal -->
+      <g class="sky-reflections" opacity="0.25">
+        <!-- Blurry mirrored building shapes in water -->
+        <rect x="145" y="200" width="50" height="60" fill="rgba(255,215,0,0.04)"/>
+        <rect x="706" y="200" width="48" height="50" fill="rgba(255,215,0,0.04)"/>
+        <rect x="1178" y="200" width="55" height="55" fill="rgba(245,158,11,0.04)"/>
+        <!-- Neon light streaks in water -->
+        <line x1="170" y1="200" x2="160" y2="265" stroke="rgba(255,215,0,0.3)" stroke-width="1" class="reflection-streak"/>
+        <line x1="730" y1="200" x2="735" y2="265" stroke="rgba(255,215,0,0.25)" stroke-width="1" class="reflection-streak"/>
+        <line x1="1205" y1="200" x2="1200" y2="265" stroke="rgba(245,158,11,0.3)" stroke-width="1" class="reflection-streak"/>
+        <line x1="642" y1="200" x2="645" y2="265" stroke="rgba(245,158,11,0.2)" stroke-width="1" class="reflection-streak"/>
+      </g>
+
+      <!-- Glow filter -->
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-strong">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Stars in sky -->
+      <g class="sky-stars">
+        <circle cx="80" cy="30" r="0.8" fill="white" opacity="0.4"/>
+        <circle cx="240" cy="15" r="0.6" fill="white" opacity="0.3"/>
+        <circle cx="420" cy="40" r="1" fill="white" opacity="0.5"/>
+        <circle cx="560" cy="10" r="0.7" fill="#ffd700" opacity="0.6"/>
+        <circle cx="750" cy="25" r="0.8" fill="white" opacity="0.3"/>
+        <circle cx="900" cy="35" r="0.6" fill="#f59e0b" opacity="0.5"/>
+        <circle cx="1050" cy="8" r="0.9" fill="white" opacity="0.4"/>
+        <circle cx="1280" cy="28" r="0.7" fill="white" opacity="0.35"/>
+        <circle cx="1380" cy="45" r="0.8" fill="#ffd700" opacity="0.4"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footer-content">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#hero" class="footer-logo" aria-label="premiumprints020 — back to top">
+          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+            <polygon points="16,1 31,9 31,23 16,31 1,23 1,9" stroke="url(#fl)" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="16" r="3" fill="url(#fl)"/>
+            <defs>
+              <linearGradient id="fl" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ffd700"/><stop offset="1" stop-color="#f59e0b"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>premiumprints020</span>
+        </a>
+        <p>Premium 3D print studio.<br>Amsterdam — Worldwide.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram" class="footer-social-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn" class="footer-social-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter" class="footer-social-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#viral">Hall of Fame</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Materials</h4>
+        <ul>
+          <li><a href="#ai-lab">Resin HD</a></li>
+          <li><a href="#ai-lab">Carbon Fiber</a></li>
+          <li><a href="#ai-lab">Nylon PA12</a></li>
+          <li><a href="#ai-lab">Metal PLA</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@premiumprints020.nl">hello@premiumprints020.nl</a></li>
+          <li><a href="tel:+31201234567">+31 20 123 4567</a></li>
+          <li><span style="color:rgba(255,255,255,0.35)">Keizersgracht 221</span></li>
+          <li><span style="color:rgba(255,255,255,0.35)">1016 DV Amsterdam</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 premiumprints020 — Amsterdam</p>
+      <p>
+        <a href="#">Privacy</a>
+        <span>·</span>
+        <a href="#">Terms</a>
+        <span>·</span>
+        <a href="#">Cookies</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Floating back to top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
